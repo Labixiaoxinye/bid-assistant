@@ -130,7 +130,7 @@ def read_any_file(path):
 
 
 # ============================================================
-#  工程量清单：代码直接提取（不经过AI）
+#  工程量清单：代码按固定格式抓取 + 按编码去重（不进汇总环节）
 # ============================================================
 def collect_boq(cache_dir):
     pat = re.compile(
@@ -417,7 +417,7 @@ def build_doc(data, FILE_PATH, boq_items):
 
     add_para(doc, f"【九、工程量清单】（共 {len(boq_items)} 条）", size=13, bold=True,
              color=COLOR_HEAD, space_after=2)
-    add_para(doc, "⚠️ 本表由程序直接从原文提取，未经过 AI 改写；报价前请与原文清单逐项核对，防止漏项",
+    add_para(doc, "⚠️ 本表由程序按固定格式从分块提取结果中抓取、按项目编码去重，不进入汇总环节；报价前请与原文清单逐项核对，防止漏项",
              size=10, bold=True, color=COLOR_WARN, indent=12, space_after=6)
     render_boq_table(doc, boq_items)
     add_para(doc, "", size=6, space_after=8)
@@ -537,7 +537,7 @@ def process_file(FILE_PATH, log, stop_event, on_progress=None):
 
     # ---------- 代码直接抓清单 ----------
     boq_items = collect_boq(cache_dir)
-    log(f"📋 程序直接提取到工程量清单：{len(boq_items)} 条（未经AI，不丢失）")
+    log(f"📋 代码抓取工程量清单：{len(boq_items)} 条（按编码去重，不进汇总环节）")
 
     # ---------- 分组汇总 ----------
     group_size = 8
