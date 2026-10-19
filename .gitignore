@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# 运行产物
+*_缓存/
+*.docx
+*.exe
+build/
+dist/
+*.spec
+*.saving.docx
+
+# 敏感配置（不要提交）
+.env
+config.json
+company_profile.json
+
+# 系统
+.DS_Store
+Thumbs.db
